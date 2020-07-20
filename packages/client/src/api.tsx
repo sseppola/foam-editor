@@ -31,8 +31,29 @@ export const useApi = () => {
           return Promise.reject('Missing project path');
         }
         return fetch(
-          getUrl(`/read/${encodeURIComponent(noteId)}`, projectConfig.path),
+          getUrl(`/notes/${encodeURIComponent(noteId)}`, projectConfig.path),
           {method: 'GET'},
+        ).then((res) => {
+          if (res.ok) {
+            return res.text();
+          }
+
+          return res.text().then((text) => Promise.reject(text));
+        });
+      },
+      saveNote: (noteId: string, content: string): Promise<string> => {
+        if (!projectConfig.path) {
+          return Promise.reject('Missing project path');
+        }
+
+        return fetch(
+          getUrl(`/notes/${encodeURIComponent(noteId)}`, projectConfig.path),
+          {
+            method: 'POST',
+            mode: 'cors',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({content}),
+          },
         ).then((res) => {
           if (res.ok) {
             return res.text();

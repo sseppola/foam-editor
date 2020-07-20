@@ -22,8 +22,6 @@ export const Sidebar = (props: {
       });
   }, [api]);
 
-  console.log('notes', notes);
-
   return (
     <aside className="notes-sidebar">
       <ul>

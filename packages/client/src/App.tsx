@@ -1,13 +1,14 @@
 import './App.css';
 
 import React from 'react';
+import debounce from 'lodash/debounce';
 
 import {Header} from './Header';
 import {ProjectConfigProvider} from './project-config';
 import {Sidebar} from './Sidebar';
 import {useApi} from './api';
 
-import {UnControlled as CodeMirror} from 'react-codemirror2/.ts';
+import {Controlled as CodeMirror} from 'react-codemirror2/.ts';
 require('codemirror/mode/gfm/gfm');
 
 function App() {
@@ -42,12 +43,22 @@ const Editor = (props: {selectedNoteId: string}) => {
       .readNote(selectedNoteId)
       .then((noteContent) => {
         set_noteContent(noteContent);
-        console.log('noteContent', noteContent);
       })
       .catch((err) => {
         console.error(err);
       });
   }, [api, selectedNoteId]);
+
+  const saveChanges = React.useCallback(
+    debounce(
+      (updatedContent: string) => {
+        api.saveNote(selectedNoteId, updatedContent);
+      },
+      500,
+      {leading: false, trailing: true},
+    ),
+    [api, selectedNoteId],
+  );
 
   return (
     <CodeMirror
@@ -58,7 +69,10 @@ const Editor = (props: {selectedNoteId: string}) => {
         lineNumbers: false,
         lineWrapping: true,
       }}
-      onChange={(editor, data, value) => {}}
+      onBeforeChange={(editor, data, value) => {
+        set_noteContent(value);
+        saveChanges(value);
+      }}
     />
   );
 };

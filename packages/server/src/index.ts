@@ -19,6 +19,7 @@ declare global {
 
 const glob = util.promisify(_glob);
 const asyncAccess = util.promisify(fs.access);
+const writeFile = util.promisify(fs.writeFile);
 
 const resolveProjectPath = (projectPath: string) => {
   if (projectPath.startsWith('~')) {
@@ -40,8 +41,6 @@ const getNoteTitle = async (notePath: string) => {
 };
 
 const getNoteInfo = async (notePath: string) => {
-  console.log('notePath', notePath);
-
   return {
     id: hashString(notePath),
     path: notePath,
@@ -75,10 +74,7 @@ const port = 3300;
 app.use(
   cors({
     origin: function (origin, callback) {
-      // db.loadOrigins is an example call to load
-      // a list of origins from a backing database
       const allow = /https?:\/\/localhost/.test(origin || '');
-      console.log('CORS origin', origin);
       callback(null, allow);
     },
   }),
@@ -126,7 +122,7 @@ app.get('/notes', checkFoamProject, async (req, res) => {
   res.json(notes);
 });
 
-app.get('/read/:id', checkFoamProject, async (req, res) => {
+app.get('/notes/:id', checkFoamProject, async (req, res) => {
   const {projectPath} = req;
   const noteId = req.params.id ?? '';
   if (!noteId) {
@@ -139,6 +135,29 @@ app.get('/read/:id', checkFoamProject, async (req, res) => {
   }
 
   return res.sendFile(note.path);
+});
+
+app.post('/notes/:id', checkFoamProject, async (req, res) => {
+  const {projectPath} = req;
+  const noteId = req.params.id ?? '';
+  if (!noteId) {
+    return res.status(404).send('Missing note id');
+  }
+
+  const note = await getNoteById(projectPath, noteId);
+  if (!note) {
+    return res.status(404).send('Could not find note');
+  }
+
+  const content = req.body.content as string;
+
+  try {
+    await writeFile(note.path, content);
+  } catch (error) {
+    return res.status(500).send('Failed to save file');
+  }
+
+  return res.status(200).send('OK');
 });
 
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
