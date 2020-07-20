@@ -1,0 +1,88 @@
+@import '../node_modules/codemirror/lib/codemirror.css';
+@import './codemirror.css';
+
+:root {
+  --header-height: 44px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100vh;
+  overflow: hidden;
+}
+
+#root, .App {
+  height: 100%;
+  overflow: hidden;
+}
+
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-top: var(--header-height);
+  box-sizing: border-box;
+}
+
+
+.App-header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background-color: #282c34;
+  min-height: var(--header-height);
+  height: var(--header-height);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.App-logo {
+  font-size: 24px;
+}
+
+.App-body {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  flex-grow: 1;
+  max-height: 100%;
+}
+
+
+.cursor-pointer {
+  cursor: pointer;
+}
+.flex {
+  display: flex;
+}
+.justify-stretch {
+  justify-conent: stretch;
+}
+.overflow-scroll {
+  overflow: scroll;
+}
+
+.notes-sidebar {
+  width: 33%;
+  max-width: 400px;
+  background-color: lightgray;
+  text-align: left;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
