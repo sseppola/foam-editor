@@ -1,20 +1,30 @@
 # Foam Editor
 
-A Foam editor for people who don't like the VSCode experience, but want the other benefits of Foam.
+A Foam editor for people who don't enjoy the VSCode experience, but want the other benefits of Foam.
+
+Benefits:
+
+1. Own your notes in plaintext
+2. Back up and collaborate via git
+3. Publish your content from your notes
 
 ## Features
 
+- Estetic note taking
 - Github Flavored Markdown
 
 ## Todos
 
-A goal of this project is to resemble the Foam VSCode environment in terms of features and keybindings.
+A goal of this project is to resemble the Foam VSCode environment as much as possible, so when in doubt, use the Foam defaults.
 
-- [ ] Backlinking panel
-- [ ] Style headers
+- [ ] Style headers (leading space)
 - [ ] Inline links
+- [ ] Clickable links
+- [ ] Brackets should be added to both sides of a marked word (rather than overwriting)
+- [ ] Keybindings (same as `Markdown All in One` to match Foam experience)
+- [ ] Toggle-able darkmode
+- [ ] Backlinking panel
 - [ ] Command palette ("turn into header 3", Todo, link, current date)
-- [ ] Keybindings
 - [ ] Yarn workspaces
 
 PRs are welcome

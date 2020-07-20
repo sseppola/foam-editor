@@ -1,8 +1,12 @@
 @import '../node_modules/codemirror/lib/codemirror.css';
-@import './codemirror.css';
+@import './styles/codemirror.css';
 
 :root {
   --header-height: 44px;
+  --screen-sm: 640px;
+  --screen-md: 768px;
+  --screen-lg: 1024px;
+  --screen-xl: 1280px;
 }
 
 * {
@@ -17,6 +21,14 @@ html, body {
 #root, .App {
   height: 100%;
   overflow: hidden;
+}
+
+html {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  background-color: white;
+  color: #374151;
 }
 
 .App {
@@ -57,32 +69,48 @@ html, body {
   max-height: 100%;
 }
 
+.max-w-screen-sm { max-width: var(--screen-sm); }
+.max-w-screen-md { max-width: var(--screen-md); }
+.max-w-screen-lg { max-width: var(--screen-lg); }
+.max-w-screen-xl { max-width: var(--screen-xl); }
 
-.cursor-pointer {
-  cursor: pointer;
-}
-.flex {
-  display: flex;
-}
-.justify-stretch {
-  justify-conent: stretch;
-}
-.overflow-scroll {
-  overflow: scroll;
-}
+
+.h-full {             height: 100%;}
+.h-screen {           height: 100vh;}
+
+.w-full {             width: 100%;}
+.w-screen {           width: 100vw;}
+
+.m-auto {             margin: auto;}
+.m-x-auto {           margin-right: auto; margin-left: auto;}
+.m-y-auto {           margin-top: auto; margin-bottom: auto;}
+
+.flex-1 {             flex: 1 1 0%;}
+.flex-auto {          flex: 1 1 auto;}
+.flex-initial {       flex: 0 1 auto;}
+.flex-none {          flex: none;}
+.flex-grow {          flex-grow: 1;}
+.flex-shrink {        flex-shrink: 1; }
+
+.justify-start {      justify-content: flex-start;}
+.justify-end {        justify-content: flex-end;}
+.justify-center {     justify-content: center;}
+.justify-between {    justify-content: space-between;}
+.justify-around {     justify-content: space-around;}
+.justify-evenly {     justify-content: space-evenly;}
+
+.content-center {     align-content: center;}
+.content-start {      align-content: flex-start;}
+.content-end {        align-content: flex-end;}
+.content-between {    align-content: space-between;}
+.content-around {     align-content: space-around;}
+
+.cursor-pointer {     cursor: pointer;}
+.overflow-scroll {    overflow: scroll;}
 
 .notes-sidebar {
   width: 33%;
   max-width: 400px;
   background-color: lightgray;
   text-align: left;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

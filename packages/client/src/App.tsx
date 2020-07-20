@@ -63,6 +63,7 @@ const Editor = (props: {selectedNoteId: string}) => {
   return (
     <CodeMirror
       value={noteContent}
+      className="flex-grow m-x-auto max-w-screen-md"
       options={{
         mode: 'gfm',
         theme: 'elegant',
