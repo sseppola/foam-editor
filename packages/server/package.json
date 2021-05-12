@@ -20,7 +20,7 @@
     "typescript": "3.9.7"
   },
   "dependencies": {
-    "codemirror": "5.55.0",
+    "codemirror": "5.58.2",
     "cors": "2.8.5",
     "express": "4.17.1",
     "glob": "7.1.6"
